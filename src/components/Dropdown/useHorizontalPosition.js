@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 function useHorizontalPosition(togglerRef, contentRef) {
   // FIXME: remove window dependecy to prevent CI/CD from breaking
-  const innerWidth = useRef(window ? window.innerWidth : null);
+  const innerWidth = useRef(global.window ? window.innerWidth : null);
 
   const [posX, setPosX] = useState(0);
 
