@@ -7,7 +7,7 @@ const createPages = (createPage, edges) => {
 
     createPage({
       path: node.fields.slug,
-      component: path.resolve(`./src/templates/docs-content.js`),
+      component: path.resolve(`./src/docs/templates/docs-content.js`),
       context: {
         id: node.id,
         prev,

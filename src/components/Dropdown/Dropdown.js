@@ -13,13 +13,18 @@ function Dropdown({ of: Component, backdropOpacity, width, children }) {
 
   const offset = useHorizontalPosition(togglerRef, contentRef);
 
-  const [state, handlers] = useDropdownState();
+  const [isVisible, handlers] = useDropdownState();
 
   useOnClickInside(backdropRef, handlers.close);
 
   const Toggler = React.isValidElement(Component)
     ? Component
-    : Component(state);
+    : Component(isVisible);
+
+  const DropdownChildren =
+    React.isValidElement(children) || Array.isArray(children)
+      ? children
+      : children(handlers.close);
 
   const TogglerChildren = React.Children.map(
     Toggler.props.children,
@@ -38,7 +43,7 @@ function Dropdown({ of: Component, backdropOpacity, width, children }) {
     <Container>
       <Backdrop
         ref={backdropRef}
-        on={state.visible}
+        on={isVisible}
         backdropOpacity={backdropOpacity}
       />
       {React.cloneElement(
@@ -46,17 +51,21 @@ function Dropdown({ of: Component, backdropOpacity, width, children }) {
         {
           ref: togglerRef,
           onClick: handleTogglerClick,
-          style: { ...Toggler.props.style, position: 'relative', zIndex: 100 },
+          style: {
+            ...Toggler.props.style,
+            position: 'relative',
+            zIndex: isVisible ? 100 : 'auto',
+          },
         },
-        [...TogglerChildren, <Arrow key="arrow" on={state.visible} />]
+        [...TogglerChildren, <Arrow key="arrow" on={isVisible} />]
       )}
       <ContainerFloat
         ref={contentRef}
         width={width}
         offset={offset}
-        on={state.visible}
+        on={isVisible}
       >
-        {children({ ...state, close: handlers.close })}
+        {DropdownChildren}
       </ContainerFloat>
     </Container>
   );

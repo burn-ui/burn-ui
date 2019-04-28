@@ -19,10 +19,65 @@
     "url": "https://github.com/burn-ui/burn-ui/issues"
   },
   "homepage": "https://burn-ui.com",
-  "dependencies": {
+  "scripts": {
+    "docs:build": "rimraf public && cross-env NODE_ENV=docs-production gatsby build",
+    "docs:start": "cross-env NODE_ENV=docs-development gatsby develop",
+    "build": "run-s build:cjs build:esm build:es build:umd build:copy-files",
+    "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ./babel.config.js ./src/components --out-dir build --ignore \"**/*.test.js\"",
+    "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ./babel.config.js ./src/components --out-dir build/esm --ignore \"**/*.test.js\"",
+    "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src/components --out-dir build/es --ignore \"**/*.test.js\"",
+    "build:umd": "cross-env BABEL_ENV=production-umd rollup -c ./rollup.config.js",
+    "build:copy-files": "node scripts/copy-files.js",
+    "prebuild": "rimraf build",
+    "lint": "eslint src/components",
+    "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
+    "format": "npm run prettier -- --write",
+    "format:check": "npm run lint && npm run prettier -- --list-different",
+    "release": "standard-version",
+    "release:check": "standard-version --dry-run",
+    "size:why": "size-limit --why build/index.js",
+    "commit": "git cz"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
+    "styled-components": ">= 4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@mdx-js/mdx": "^1.0.14",
     "@mdx-js/react": "^1.0.6",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-react-remove-properties": "^0.3.0",
+    "babel-plugin-styled-components": "^1.10.0",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-preset-gatsby": "^0.1.11",
     "core-js": "^2.5.7",
+    "cross-env": "^5.2.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint-config-react-app": "^4.0.0",
+    "eslint-plugin-flowtype": "^3.6.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "fs-extra": "^7.0.1",
     "gatsby": "^2.3.25",
     "gatsby-image": "^2.0.39",
     "gatsby-link": "^2.0.16",
@@ -33,24 +88,65 @@
     "gatsby-plugin-react-helmet": "^3.0.12",
     "gatsby-plugin-sharp": "^2.0.35",
     "gatsby-plugin-styled-components": "^3.0.7",
-    "gatsby-remark-copy-linked-files": "^2.0.11",
+    "gatsby-plugin-typography": "^2.2.13",
+    "gatsby-remark-copy-linked-files": "^2.0.12",
+    "gatsby-remark-external-links": "0.0.4",
     "gatsby-remark-images": "^3.0.10",
     "gatsby-remark-prismjs": "^3.2.8",
     "gatsby-source-filesystem": "^2.0.29",
-    "gatsby-transformer-remark": "^2.3.8",
+    "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.18",
+    "glob": "^7.1.3",
+    "husky": "^2.1.0",
+    "jest-dom": "^3.1.3",
+    "jest-styled-components": "^6.3.1",
+    "lint-staged": "^8.1.5",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "prettier": "^1.17.0",
     "prismjs": "^1.16.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "~5.2.0",
-    "react-youtube": "^7.9.0",
-    "styled-components": "^4.2.0"
+    "react-hooks-testing-library": "^0.5.0",
+    "react-testing-library": "^7.0.0",
+    "react-typography": "^0.16.19",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-size-snapshot": "^0.8.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "size-limit": "^1.2.0",
+    "standard-version": "^5.0.2",
+    "styled-components": "^4.2.0",
+    "typography": "^0.16.19"
   },
-  "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.0"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
-  "scripts": {
-    "build": "rm -rf public && gatsby build",
-    "start": "gatsby develop"
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format:check && lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
+        "prettier --write",
+        "git add"
+      ]
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

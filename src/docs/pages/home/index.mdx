@@ -1,0 +1,73 @@
+---
+title: 'The Dropdown'
+date: '2019-04-27'
+slug: '/'
+---
+
+# Dropdown
+
+Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando `um impressor` desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou `na década de 60`, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus `pageMaker`.
+
+import Dropdown from '@components/Dropdown';
+
+<div style={{ margin: '10px 0' }}>
+  <Dropdown of={<button>CLICK ME</button>}>
+    <span>Option 1</span>
+    <span>Option 2</span>
+    <span>Option 3</span>
+  </Dropdown>
+</div>
+
+```jsx
+import Dropdown from '@burn-ui/core/Dropdown';
+
+<Dropdown of={<button>CLICK ME</button>}>
+  <span>Option 1</span>
+  <span>Option 2</span>
+  <span>Option 3</span>
+</Dropdown>;
+```
+
+<div style={{ margin: '10px 0' }}>
+  <Dropdown of={isVisible => <button>{isVisible ? 'CLOSE' : 'OPEN'}</button>}>
+    <span>Option 1</span>
+    <span>Option 2</span>
+    <span>Option 3</span>
+  </Dropdown>
+</div>
+
+```jsx
+import Dropdown from '@burn-ui/core/Dropdown';
+
+<Dropdown of={isVisible => <button>{isVisible ? 'CLOSE' : 'OPEN'}</button>}>
+  <span>Option 1</span>
+  <span>Option 2</span>
+  <span>Option 3</span>
+</Dropdown>;
+```
+
+<div style={{ margin: '10px 0' }}>
+  <Dropdown of={isVisible => <button>{isVisible ? 'CLOSE' : 'OPEN'}</button>}>
+    {close => (
+      <>
+        <span>Option 1</span>
+        <span>Option 2</span>
+        <span>Option 3</span>
+        <button onClick={() => close()}>Close dropdown</button>
+      </>
+    )}
+  </Dropdown>
+</div>
+
+```jsx
+<Dropdown of={isVisible => <button>{isVisible ? 'CLOSE' : 'OPEN'}</button>}>
+  {close => (
+    <>
+      <span>Option 1</span>
+      <span>Option 2</span>
+      <span>Option 3</span>
+      <button onClick={() => close()}>Close dropdown</button>
+    </>
+  )}
+</Dropdown>
+```

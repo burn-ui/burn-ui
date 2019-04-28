@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 
-import Layout from './components/Layout';
+import Layout from '../components/Layout';
 
 function DocsContent({ data }) {
   const { site, mdx } = data;
