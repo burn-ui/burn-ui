@@ -28,7 +28,6 @@
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src/components --out-dir build/es --ignore \"**/*.test.js\"",
     "build:umd": "cross-env BABEL_ENV=production-umd rollup -c ./rollup.config.js",
     "build:copy-files": "node scripts/copy-files.js",
-    "prebuild": "rimraf build",
     "lint": "eslint src/components",
     "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "format": "npm run prettier -- --write",
@@ -36,6 +35,8 @@
     "release": "standard-version",
     "release:check": "standard-version --dry-run",
     "size:why": "size-limit --why build/index.js",
+    "prebuild": "rimraf build",
+    "precommit": "npm run format:check",
     "commit": "git cz"
   },
   "peerDependencies": {
@@ -132,7 +133,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format:check && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
