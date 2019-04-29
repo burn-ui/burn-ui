@@ -60,6 +60,8 @@ import Dropdown from '@burn-ui/core/Dropdown';
 </div>
 
 ```jsx
+import Dropdown from '@burn-ui/core/Dropdown';
+
 <Dropdown of={isVisible => <button>{isVisible ? 'CLOSE' : 'OPEN'}</button>}>
   {close => (
     <>
@@ -69,5 +71,5 @@ import Dropdown from '@burn-ui/core/Dropdown';
       <button onClick={() => close()}>Close dropdown</button>
     </>
   )}
-</Dropdown>
+</Dropdown>;
 ```
