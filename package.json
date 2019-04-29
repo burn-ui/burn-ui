@@ -152,7 +152,7 @@
   },
   "lint-staged": {
     "linters": {
-      "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
+      "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|graphql)": [
         "prettier --write",
         "git add"
       ]
