@@ -1,7 +1,7 @@
 {
   "name": "@burn-ui/core",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "author": "Matheus Marques <marquesm91@gmail.com>",
   "description": "React components to help web development",
   "keywords": [
@@ -19,24 +19,29 @@
     "url": "https://github.com/burn-ui/burn-ui/issues"
   },
   "homepage": "https://burn-ui.com",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "docs:build": "rimraf public && cross-env NODE_ENV=docs-production gatsby build",
-    "docs:start": "cross-env NODE_ENV=docs-development gatsby develop",
+    "docs:start": "cross-env BABEL_ENV=docs-development gatsby develop",
+    "docs:build": "cross-env BABEL_ENV=docs-production gatsby build",
     "build": "run-s build:cjs build:esm build:es build:umd build:copy-files",
     "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ./babel.config.js ./src/components --out-dir build --ignore \"**/*.test.js\"",
     "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ./babel.config.js ./src/components --out-dir build/esm --ignore \"**/*.test.js\"",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src/components --out-dir build/es --ignore \"**/*.test.js\"",
-    "build:umd": "cross-env BABEL_ENV=production-umd rollup -c ./rollup.config.js",
+    "build:umd": "cross-env BABEL_ENV=umd rollup -c ./rollup.config.js",
     "build:copy-files": "node scripts/copy-files.js",
     "lint": "eslint src/components",
     "prettier": "prettier \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
     "format": "npm run prettier -- --write",
     "format:check": "npm run lint && npm run prettier -- --list-different",
-    "release": "standard-version",
-    "release:check": "standard-version --dry-run",
+    "changelog": "standard-version",
+    "changelog:check": "standard-version --dry-run",
     "size:why": "size-limit --why build/index.js",
     "prebuild": "rimraf build",
     "precommit": "npm run format:check",
+    "release": "npm run build && npm release ./build --tag next",
+    "release:check": "npm run build && npm pack ./build",
     "commit": "git cz"
   },
   "peerDependencies": {
