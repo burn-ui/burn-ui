@@ -2,7 +2,11 @@
   "name": "@burn-ui/core",
   "version": "0.0.2",
   "private": false,
-  "author": "Matheus Marques <marquesm91@gmail.com>",
+  "author": {
+    "name": "Matheus Marques",
+    "email": "marquesm91@gmail.com",
+    "url": "https://github.com/marquesm91"
+  },
   "description": "React components to help web development",
   "keywords": [
     "react",
@@ -22,10 +26,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "sideEffects": false,
   "scripts": {
     "docs:start": "cross-env BABEL_ENV=docs-development gatsby develop",
     "docs:build": "cross-env BABEL_ENV=docs-production gatsby build",
-    "build": "run-s build:cjs build:esm build:es build:umd build:copy-files",
+    "build": "run-s build:cjs build:copy-files",
     "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ./babel.config.js ./src/components --out-dir build --ignore \"**/*.test.js\"",
     "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ./babel.config.js ./src/components --out-dir build/esm --ignore \"**/*.test.js\"",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src/components --out-dir build/es --ignore \"**/*.test.js\"",
@@ -39,7 +44,8 @@
     "changelog:check": "standard-version --dry-run",
     "size:why": "size-limit --why build/index.js",
     "prebuild": "rimraf build",
-    "release": "npm run build && npm publish ./build --tag next",
+    "release": "npm run build && npm publish ./build --tag lastest",
+    "release:next": "npm run build && npm publish ./build --tag next",
     "release:check": "npm run build && npm pack ./build",
     "commit": "git cz"
   },
