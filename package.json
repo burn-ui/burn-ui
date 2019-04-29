@@ -39,7 +39,7 @@
     "changelog:check": "standard-version --dry-run",
     "size:why": "size-limit --why build/index.js",
     "prebuild": "rimraf build",
-    "release": "npm run build && npm release ./build --tag next",
+    "release": "npm run build && npm publish ./build --tag next",
     "release:check": "npm run build && npm pack ./build",
     "commit": "git cz"
   },
