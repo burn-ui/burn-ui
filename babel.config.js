@@ -25,6 +25,12 @@ const packageConfig = {
         mode: 'unsafe-wrap',
       },
     ],
+    [
+      'babel-plugin-styled-components',
+      {
+        pure: true,
+      },
+    ],
   ],
   ignore: [/@babel[\\|/]runtime/],
 };
