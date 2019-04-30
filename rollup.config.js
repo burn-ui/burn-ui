@@ -11,7 +11,7 @@ const input = './src/components/index.js';
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
-  'styled-components': 'styled-components',
+  'styled-components': 'styled',
 };
 
 const babelOptions = {
