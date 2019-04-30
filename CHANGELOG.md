@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/burn-ui/burn-ui/compare/v0.0.8...v0.0.9) (2019-04-30)
+
+
+### Bug Fixes
+
+* globals styled-components ([7e6fe3e](https://github.com/burn-ui/burn-ui/commit/7e6fe3e))
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/burn-ui/burn-ui/compare/v0.0.7...v0.0.8) (2019-04-30)
 
