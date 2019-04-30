@@ -1,6 +1,6 @@
 {
   "name": "@burn-ui/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "author": {
     "name": "Matheus Marques",
@@ -30,7 +30,7 @@
   "scripts": {
     "docs:start": "cross-env BABEL_ENV=docs-development gatsby develop",
     "docs:build": "cross-env BABEL_ENV=docs-production gatsby build",
-    "build": "run-s build:cjs build:copy-files",
+    "build": "run-s build:cjs build:umd build:copy-files",
     "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ./babel.config.js ./src/components --out-dir build --ignore \"**/*.test.js\"",
     "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ./babel.config.js ./src/components --out-dir build/esm --ignore \"**/*.test.js\"",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ./babel.config.js ./src/components --out-dir build/es --ignore \"**/*.test.js\"",
